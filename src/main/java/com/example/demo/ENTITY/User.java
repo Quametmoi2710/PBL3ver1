@@ -1,48 +1,37 @@
 package com.example.demo.ENTITY;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-
-    @Column(length = 50, nullable = false)
     private String username;
-
-    @Column(length = 50, nullable = false)
     private String password;
-
-    @Column(length = 256, nullable = false)
     private String email;
-
-    @Column(length = 12, nullable = false)
     private String phonenumber;
-
-    @Column(nullable = true)
     private Date birthday;
-
-    @Column(length = 256, nullable = false)
     private String address;
-
-    @Column(nullable = false)
     private Boolean status;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Orders.class)
     private List<Orders> ordersList;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Cart> cartList;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = CartLine.class)
+    private List<CartLine> cartLineList;
     @ManyToOne(targetEntity = Role.class)
-    @JoinColumn(name = "role", nullable = false)
+    @JoinColumn(name = "role")
     private Role role;
+
     public User() {
+        this.cartLineList = new ArrayList<CartLine>();
+        this.ordersList = new ArrayList<Orders>();
         this.status = true;
     }
 
-    public User(Integer id, String username, String password, String email, String phonenumber, Date birthday, String address, Boolean status, List<Orders> ordersList, List<Cart> cartList, Role role) {
+    public User(Integer id, String username, String password, String email, String phonenumber, Date birthday, String address, Boolean status, List<Orders> ordersList, List<CartLine> cartLineList, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,7 +41,7 @@ public class User {
         this.address = address;
         this.status = status;
         this.ordersList = ordersList;
-        this.cartList = cartList;
+        this.cartLineList = cartLineList;
         this.role = role;
     }
 
@@ -61,7 +50,7 @@ public class User {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+       this.id = id;
     }
 
     public String getUsername() {
@@ -128,12 +117,12 @@ public class User {
         this.ordersList = ordersList;
     }
 
-    public List<Cart> getCartList() {
-        return cartList;
+    public List<CartLine> getCartLineList() {
+        return cartLineList;
     }
 
-    public void setCartList(List<Cart> cartList) {
-        this.cartList = cartList;
+    public void setCartLineList(List<CartLine> cartLineList) {
+        this.cartLineList = cartLineList;
     }
 
     public Role getRole() {
@@ -142,5 +131,19 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void addCartLine(CartLine cartLine){
+        if(this.cartLineList == null) this.cartLineList = new ArrayList<CartLine>();
+        this.cartLineList.add(cartLine);
+    }
+
+    public void addOrders(Orders orders){
+        if(this.ordersList == null) this.ordersList = new ArrayList<Orders>();
+        this.ordersList.add(orders);
+    }
+
+    public void clearAllCartLineList(){
+        if(this.cartLineList != null) this.cartLineList.clear();
     }
 }

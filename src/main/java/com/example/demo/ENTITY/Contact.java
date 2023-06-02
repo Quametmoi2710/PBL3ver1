@@ -6,18 +6,11 @@ import java.sql.Date;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-
-    @Column(length = 50, nullable = false)
     private String c_content;
-
-    @Column(length = 50, nullable = false)
     private String c_name;
-
-    @Column(length = 256, nullable = false)
     private String c_mail;
-
-    @Column(length = 500, nullable = false)
     private String c_message;
     private Date c_date;
 

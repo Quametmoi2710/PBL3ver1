@@ -6,13 +6,13 @@ import java.util.List;
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "name", length = 50, nullable = false)
     private String name;
     @ManyToOne(targetEntity = ParentCategory.class)
-    @JoinColumn(name = "parentCategory", nullable = false)
+    @JoinColumn(name = "parentCategory")
     private ParentCategory parentCategory;
-    @OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Product.class)
     List<Product> productList;
     public ProductCategory() {
     }

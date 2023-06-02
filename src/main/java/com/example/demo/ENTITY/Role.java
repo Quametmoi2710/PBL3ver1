@@ -6,18 +6,19 @@ import java.util.List;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    @Column(length = 25, nullable = false)
     private String name;
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<User> users;
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = User.class)
+    private List<User> userList;
+
     public Role() {
     }
 
-    public Role(Integer id, String name, List<User> users) {
+    public Role(Integer id, String name, List<User> userList) {
         this.id = id;
         this.name = name;
-        this.users = users;
+        this.userList = userList;
     }
 
     public Integer getId() {
@@ -36,11 +37,15 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public void addUser(User user){
+        this.userList.add(user);
     }
 }

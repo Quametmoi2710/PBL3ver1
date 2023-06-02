@@ -7,35 +7,28 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-
-    @Column(name = "name", length = 50, nullable = false)
     private String name;
     private Integer totalQuantity;
     private Integer soldQuantity;
     private Integer remainQuantity;
     private Integer price;
-    @Column(name = "description", length = 50, nullable = true)
     private String description;
     private Date productDate;
     private Date expirationDate;
     private Date createDate;
     private Date updateDate;
-
     @ManyToOne(targetEntity = ProductCategory.class)
-    @JoinColumn(name = "productCategory", nullable = false)
+    @JoinColumn(name = "productCategory")
     private ProductCategory productCategory;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = OrdersLine.class)
     List<OrdersLine> ordersLineList;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<Cart> cartList;
-
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = CartLine.class)
+    List<CartLine> cartLineList;
     public Product() {
     }
-
-    public Product(Integer id, String name, Integer totalQuantity, Integer soldQuantity, Integer remainQuantity, Integer price, String description, Date productDate, Date expirationDate, Date createDate, Date updateDate, ProductCategory productCategory, List<OrdersLine> ordersLineList, List<Cart> cartList) {
+    public Product(Integer id, String name, Integer totalQuantity, Integer soldQuantity, Integer remainQuantity, Integer price, String description, Date productDate, Date expirationDate, Date createDate, Date updateDate, ProductCategory productCategory, List<OrdersLine> ordersLineList, List<CartLine> cartLineList) {
         this.id = id;
         this.name = name;
         this.totalQuantity = totalQuantity;
@@ -49,7 +42,7 @@ public class Product {
         this.updateDate = updateDate;
         this.productCategory = productCategory;
         this.ordersLineList = ordersLineList;
-        this.cartList = cartList;
+        this.cartLineList = cartLineList;
     }
 
     public Integer getId() {
@@ -156,11 +149,11 @@ public class Product {
         this.ordersLineList = ordersLineList;
     }
 
-    public List<Cart> getCartList() {
-        return cartList;
+    public List<CartLine> getCartList() {
+        return cartLineList;
     }
 
-    public void setCartList(List<Cart> cartList) {
-        this.cartList = cartList;
+    public void setCartList(List<CartLine> cartLineList) {
+        this.cartLineList = cartLineList;
     }
 }

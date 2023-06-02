@@ -5,30 +5,24 @@ import javax.persistence.*;
 public class OrdersLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
     @ManyToOne(targetEntity = Orders.class)
-    @JoinColumn(name = "orders", nullable = false)
+    @JoinColumn(name = "orders")
     private Orders orders;
     @ManyToOne(targetEntity = Product.class)
-    @JoinColumn(name = "product", nullable = true)
-    private String product;
-
-    @Column(length = 25, nullable = false)
+    @JoinColumn(name = "product")
+    private Product product;
     private String nameProduct;
-
     private Integer quantity;
-
     private Integer price;
-
-    @Column(length = 50, nullable = true)
     private String note;
-
     private Integer total;
 
     public OrdersLine() {
     }
 
-    public OrdersLine(Integer id, Orders orders, String product, String nameProduct, Integer quantity, Integer price, String note, Integer total) {
+    public OrdersLine(Integer id, Orders orders, Product product, String nameProduct, Integer quantity, Integer price, String note, Integer total) {
         this.id = id;
         this.orders = orders;
         this.product = product;
@@ -55,11 +49,11 @@ public class OrdersLine {
         this.orders = orders;
     }
 
-    public String getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

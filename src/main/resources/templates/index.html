@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="icon" type="image/x-icon" href="img/icon.jpg">
@@ -61,8 +61,8 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Pet</span>Shoppne</h1>
+                <a th:href="@{/login}" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Pet</span>Shop</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -78,7 +78,8 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a href="#" >Hồ Bá Đạt <i class="fas fa-user-circle"></i></a>
+                <a th:href="@{/login}" >Đăng nhập</a>
+                <a th:href="@{/signup}">Đăng kí</a>
           </div>
         </div>
     </div>
@@ -124,17 +125,8 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Sản phẩm</a>
-                            <a href="detail.html" class="nav-item nav-link">Chi tiết</a>
-                            <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+                            <a th:href="@{/contact}" class="nav-item nav-link">Liên hệ</a>
                         </div>
-                        <div class="col-lg-3 col-6 text-right">
-                            <a href="cart.html" class="btn border">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge">0</span>
-                            </a>
-                      </div>
                     </div>
                 </nav>
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
@@ -143,9 +135,9 @@
                             <img class="img-fluid" src="img/carousel-1.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm 10% cho đơn đầu tin</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Mèo sơ sinh</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Mua ngay</a>
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Giá chỉ 200 cục kim cương ( ngoài chợ )</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Thanh Thảo Cute Hat Me</h3>
+                                    <a th:href="@{/login}" class="btn btn-light py-2 px-3">Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +147,7 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm 10% cho đơn đầu tin</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">Mèo ngoan</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Mua ngay</a>
+                                    <a th:href="@{/login}" class="btn btn-light py-2 px-3">Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +272,7 @@
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">siu giảm giá cho đơn đầu tiên</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Combo</h1>
-                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
+                        <a th:href="@{/login}" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -290,7 +282,7 @@
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">giảm giá siêu cấp cho đơn thứ 2</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Combo</h1>
-                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
+                        <a th:href="@{/login}" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
                     </div>
                 </div>
             </div>

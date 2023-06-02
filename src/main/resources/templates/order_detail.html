@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <link rel="icon" type="image/x-icon" href="img/icon.jpg">
@@ -65,6 +65,15 @@
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Pet</span>Shopne</h1>
                 </a>
             </div>
+            <div class="col-lg-6 col-6 text-left">
+
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="signin.html" class="btn border">
+                    <span class="badge">Đăng xuất</span>
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+          </div>
         </div>
     </div>
     <!-- Top End -->
@@ -72,12 +81,7 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Welcom to my web</h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a th:href="@{/login}">Đăng nhập</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0">Đăng ký</a></p>
-            </div>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Chi tiết sản phẩm</h1>
         </div>
     </div>
     <!-- Page Header End -->
@@ -86,66 +90,36 @@
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
-
-            <div class="col-lg-6">  
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Đăng ký</h4>
+            <div class="col-lg-2">  
+                </div>   
+                <div class="col-lg-8 table-responsive mb-5">
+                    
+                    <div class="card-header bg-primary border-0 text-center">
+                        <h4 class="font-weight-semi-bold m-0">Mã hóa đơn : #######</h4>
                     </div>
-                    <!-- Form đăng kí tài khoản, dữ liệu được trả về "/checkSignup" để xử lí -->
-                    <form th:action="@{/checkSignup}" novalidate="novalidate" method="post" th:object="${user}">
-
-                        <div class="form-group">
-                            <input type="text" class="form-control border-0 py-4" placeholder="Nhập tài khoản"
-                                th:required="required" th:field="*{username}" />
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" class="form-control border-0 py-4" placeholder="Nhập mật khẩu"
-                                th:required="required" th:field="*{password}" />
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" class="form-control border-0 py-4" placeholder="Nhập lại mật khẩu"
-                                th:required="required" name="commit_password"/>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" class="form-control border-0 py-4" placeholder="Nhập email"
-                                th:required="required" th:field="*{email}" />
-                        </div>
-
-                        <div class="form-group">
-                            <input type="tel" class="form-control border-0 py-4" placeholder="Nhập số điện thoại"
-                                th:required="required" th:field="*{phonenumber}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="birthday">Nhập ngày sinh</label>
-                            <input type="date" id="birthday" th:value="01/01/2022" name="birthday" th:required="required" th:field="*{birthday}">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control border-0 py-4" placeholder="Nhập địa chỉ"
-                                   th:required="required" th:field="*{address}" />
-                        </div>
-
-                        <div class="form-group">
-                            <p style="color:red" th:text="${notify_signup}"></p>
-
-                            <button class="btn btn-block btn-primary my-3 py-3" type="submit" th:onclick="alert(${notify_signup})">Đăng kí</button>
-                            <button class="btn btn-block btn-primary my-3 py-3" type="reset">Làm mới</button>
-                        </div>
-                    </form>
+                    <table style="width:100%">
+                        <tr>
+                          <th>ID Sản phẩm</th>
+                          <th>Tên sản phẩm</th>
+                          <th>Giá trị</th>
+                          <th>Số lượng</th>
+                          <th>Thành tiền</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>hạt</td>
+                          <td>$10000</td>
+                          <td>2</td>
+                          <td>200000</td>
+                        </tr>
+                    </table>
+                    <div class="card-header bg-secondary border-0  row px-xl-5">
+                        <div class="text-left col-lg-6"><h4 class="font-weight-semi-bold m-0">Tổng tiền : #######</h4></div>
+                        <div class="text-right col-lg-6"><h4 class="font-weight-semi-bold m-0">Trạng thái : #######</h4></div>
                     </div>
-                </div>
-                
-                <div class="col-lg-6 table-responsive mb-5">
-                    <img src="img/login.png" alt="" style="width: 480px;">
                 </div>
             </div>
         </div>
-    </div>
     <!-- Cart End -->
 
     <!-- Footer Start -->
@@ -167,7 +141,7 @@
                     <div class="col-md-4 mb-5">
                     </div>
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Phản hồi thấm kín hihi</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Phản hồi với chúng tôi</h5>
                         <form action="">
                             <div class="form-group">
                                 <input type="text" class="form-control border-0 py-4" placeholder="Nhập tên" required="required" />

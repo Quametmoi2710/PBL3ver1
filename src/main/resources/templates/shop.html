@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="icon" type="image/x-icon" href="img/icon.jpg">
@@ -61,7 +61,7 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="index.html" class="text-decoration-none">
+                <a th:href="@{/cart}" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Pet</span>Shopne</h1>
                 </a>
             </div>
@@ -77,9 +77,16 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a href="#" >Hồ Bá Đạt <i class="fas fa-user-circle"></i></a>
-          </div>
+            <div class="dropdown col-lg-3 col-6 text-right">
+                <button type="button" data-toggle="dropdown">
+                    <a href="#"><i class="fas fa-user-circle" th:text="${username}"></i></a>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/information}">Thông Tin</a>
+                    <a class="dropdown-item" th:href="@{/cart}">Giỏ hàng</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                </div>
+              </div>
         </div>
     </div>
     <!-- Top End -->
@@ -132,15 +139,12 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link">Home</a>
-                            <a href="shop.html" class="nav-item nav-link active">Sản phẩm</a>
-                            <a href="detail.html" class="nav-item nav-link">Chi tiết</a>
-                            <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+                            <a th:href="@{/contact}" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="col-lg-3 col-6 text-right">
-                            <a href="cart.html" class="btn border">
+                            <a th:href="@{/cart}"  class="btn border">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge">0</span>
+                                <span class="badge" th:text="${numberOfCartLine}">0</span>
                             </a>
                       </div>
                     </div>
@@ -154,11 +158,7 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop của tui
-                <img src="https://symbols.vn/wp-content/uploads/2021/11/Mau-bieu-tuong-cho-shiba-cute.jpg"
-                 alt="ảnh shop tui"
-                 width="50px" height="50px">
-            </h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop của tui</h1>
             <div class="d-inline-flex">
                 <p class="m-0"><a href="index.html">Home</a></p>
                 <p class="m-0 px-2">-</p>
@@ -296,33 +296,22 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                            Sắp xếp theo
-                                        </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Mới nhất</a>
-                                    <a class="dropdown-item" href="#">Phổ biến</a>
-                                    <a class="dropdown-item" href="#">Đánh giá</a>
-                                </div>
-                            </div>
-                        </div>
+                           </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="anh ne">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Chó nè</h6>
+                                <h6 class="text-truncate mb-3">PATE FOR CAT TYPE 1</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h6>100$</h6><h6 class="text-muted ml-2"></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                <a th:href="@{/addProductToCart/1}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -332,14 +321,14 @@
                                 <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Chó nx nè</h6>
+                                <h6 class="text-truncate mb-3">PATE FOR CAT TYPE 2</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h6>200$</h6><h6 class="text-muted ml-2"></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                <a th:href="@{/addProductToCart/2}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -349,14 +338,14 @@
                                 <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Chó nx nè</h6>
+                                <h6 class="text-truncate mb-3">PATE FOR CAT TYPE 3</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h6>300$</h6><h6 class="text-muted ml-2"></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                <a th:href="@{/addProductToCart/3}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -366,14 +355,14 @@
                                 <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Chó nx nè</h6>
+                                <h6 class="text-truncate mb-3">PATE FOR CAT TYPE 4</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h6>400$</h6><h6 class="text-muted ml-2"></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                <a th:href="@{/addProductToCart/4}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -510,7 +499,7 @@
                     <div class="col-md-4 mb-5">
                     </div>
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Phản hồi thấm kín hihi</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Phản hồi với chúng tôi</h5>
                         <form action="">
                             <div class="form-group">
                                 <input type="text" class="form-control border-0 py-4" placeholder="Nhập tên" required="required" />

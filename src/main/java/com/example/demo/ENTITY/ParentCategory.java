@@ -6,18 +6,19 @@ import java.util.List;
 public class ParentCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-
-    @Column(length = 50, nullable = false)
     private String name;
-    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ProductCategory> categoryList;
+    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = ProductCategory.class)
+    private List<ProductCategory> productCategoryList;
+
     public ParentCategory() {
     }
-    public ParentCategory(Integer id, String name, List<ProductCategory> categories) {
+
+    public ParentCategory(Integer id, String name, List<ProductCategory> productCategoryList) {
         this.id = id;
         this.name = name;
-        this.categoryList = categories;
+        this.productCategoryList = productCategoryList;
     }
 
     public Integer getId() {
@@ -36,11 +37,11 @@ public class ParentCategory {
         this.name = name;
     }
 
-    public List<ProductCategory> getCategories() {
-        return categoryList;
+    public List<ProductCategory> getProductCategoryList() {
+        return productCategoryList;
     }
 
-    public void setCategories(List<ProductCategory> categories) {
-        this.categoryList = categories;
+    public void setProductCategoryList(List<ProductCategory> productCategoryList) {
+        this.productCategoryList = productCategoryList;
     }
 }

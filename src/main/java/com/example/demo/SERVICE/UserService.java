@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class UserService {
+    //Inject UserRepository
     @Autowired private UserRepository userRepository;
+
     // Lấy ra danh sách người dùng
     public List<User> listAll(){
         return (List<User>) this.userRepository.findAll();
@@ -24,7 +26,21 @@ public class UserService {
         if(result.isPresent()) return result.get();
         else return null;
     }
-    //Kiểm tra đăng nhập
+
+    // Lấy người dùng dựa trên username
+    public User getByUsername(String username){
+        List<User> userList = this.listAll();
+        User obj = null;
+        for(User user : userList){
+            if(user.getUsername().equalsIgnoreCase(username)){
+                obj = user;
+                break;
+            }
+        }
+        return obj;
+    }
+
+    // Kiểm tra đăng nhập
     public boolean checkLogin(String username, String password){
         boolean check = false;
         List<User> userList = this.listAll();
@@ -52,6 +68,7 @@ public class UserService {
         }
         return check;
     }
+    // Xóa user dựa trên id
     public void delete(Integer id){
         this.userRepository.deleteById(id);
     }

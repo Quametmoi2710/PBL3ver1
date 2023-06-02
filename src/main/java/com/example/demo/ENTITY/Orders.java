@@ -1,28 +1,25 @@
 package com.example.demo.ENTITY;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "Orders")
 public class Orders {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user", nullable = false)
+    @JoinColumn(name = "user")
     private User user;
-
-    @Column(length = 50, nullable = true)
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = OrdersLine.class)
+    List<OrdersLine> ordersLineList;
     private String orderAddress;
-
-    @Column(length = 11, nullable = false)
     private String orderPhonenumber;
     private Date orderDate;
     private Date shipDate;
-    @Column(length = 25, nullable = false)
     private String status;
-    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<OrdersLine> ordersLineList;
     private Integer total;
     public Orders() {
     }
@@ -109,5 +106,10 @@ public class Orders {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    public void addOrdersLine(OrdersLine ordersLine){
+        if(this.ordersLineList == null) this.ordersLineList = new ArrayList<OrdersLine>();
+        this.ordersLineList.add(ordersLine);
     }
 }

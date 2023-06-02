@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="icon" type="image/x-icon" href="img/icon.jpg">
@@ -72,11 +72,11 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Welcom to my web</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Chào mừng đến với shop phụ kện thú cưng</h1>
             <div class="d-inline-flex">
                 <p class="m-0">Đăng nhập</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0"><a href="signup.html">Đăng ký</a></p>
+                <p class="m-0"><a th:href="@{/signup}">Đăng ký</a></p>
             </div>
         </div>
     </div>
@@ -95,18 +95,25 @@
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Đăng nhập</h4>
                     </div>
-                    <form action="">
+                    <!-- Form đăng đăng nhập tài khoản, dữ liệu sẽ được trả về "/checkLogin" để xử lí -->
+                    <form th:action="@{/checkLogin}" novalidate="novalidate" method="post">
+                        <!-- biến "username" sẽ lưu dữ liệu từ người dùng nhập vào -->
                         <div class="form-group">
                             <input type="text" class="form-control border-0 py-4" placeholder="Nhập tài khoản"
-                                required="required" />
+                                th:required="required" name="username"/>
                         </div>
+                        <!-- biến "password" sẽ lưu dữ liệu từ người dùng nhập vào -->
                         <div class="form-group">
-                            <input type="text" class="form-control border-0 py-4" placeholder="Nhập mật khẩu"
-                                required="required" />
+                            <input type="password" class="form-control border-0 py-4" placeholder="Nhập mật khẩu"
+                                th:required="required" name="password"/>
                         </div>
-                        <p class="m-0"><a href="">Quên mật khẩu</a></p>
+                        <!-- Nút thao tác -->
+                        <div>
+                            <p style="color:red" th:text="${notify_login}"></p>
+                            <button class="btn btn-block btn-primary my-3 py-3" type="submit">Đăng nhập</button>
+                            <button class="btn btn-block btn-primary my-3 py-3" type="reset">Làm mới</button>
+                        </div>
                     </form>
-                        <button class="btn btn-block btn-primary my-3 py-3">Xác nhận</button>
                     </div>
                 </div>
             </div>
